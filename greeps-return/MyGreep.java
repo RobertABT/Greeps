@@ -102,7 +102,14 @@ public class MyGreep extends Greep
             randomWalk();
             //checkFood(); //no point repeating
         }
-        
+        /*the following code should wipe memory bit 0 
+         * if there are no tomatoes at the point in memory
+         * because otherwise greeps pile up at one location
+         */
+        TomatoPile tomatoes = getTomatoes();
+        if (tomatoes == null && getX() == getMemory(1) && getY() == getMemory(2)){
+            wipeMemory();
+        }
         //Greeps are getting stuck a bit
         if (atWater()){
             int bearing = getRotation();
@@ -131,16 +138,18 @@ public class MyGreep extends Greep
     {
         // check whether there's a tomato pile here
         TomatoPile tomatoes = getTomatoes();
-        if(tomatoes != null) {
+        if(tomatoes != null) { // executes if pile is here
             loadTomato();
             // Note: this attempts to load a tomato onto *another* Greep. It won't
             // do anything if we are alone here.
-            //i think this keeps getting flipped, confusing greeps
+            //i think this keeps getting changed to other (x,y) coords, confusing greeps
             if (getMemory(0) == 0){
-            setMemory(0, FOUND_TOMATO);
-            setMemory(1, tomatoes.getX());
-            setMemory(2, tomatoes.getY());
-        }//by adding this if statement the greeps should only go to one pile
+                setMemory(0, FOUND_TOMATO);
+                setMemory(1, tomatoes.getX());
+                setMemory(2, tomatoes.getY());
+            }//by adding this if statement the greeps should only go to one pile
+            //now to try and get the xy to change only after first pile is empty
+            //else if (
         }
     }
     
@@ -166,12 +175,17 @@ public class MyGreep extends Greep
         return (int) Math.sqrt(cX * cX + cY * cY);
     }
     
+    private void wipeMemory(){
+        setMemory(0,0); //wipes Found tomato bit
+        //bytes at 1 and 2 will be reset when next pile is found
+    }
+    
     /**
      * This method specifies the name of the greeps (for display on the result board).
      * Try to keep the name short so that it displays nicely on the result board.
      */
     public String getName()
     {
-        return "Your name here";  // write your name here!
+        return "Group 1's Greeps";  // write your name here!
     }
 }
