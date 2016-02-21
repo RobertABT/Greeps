@@ -71,10 +71,8 @@ public class MyGreep extends Greep
                 dropTomato();
             }
             else {
-                if (getFlag(1) != true){
-					turnHome();
-					move();
-            	}
+				turnHome();
+				move();
             }
         }
         //a case for when we arrive at tomatoes
@@ -85,7 +83,6 @@ public class MyGreep extends Greep
                 //no block, we'll make one by calling the boolean function
                 turnTowards(getMemory(1), getMemory(2));
                 move();
-                setFlag(1,true); //set flag to say you are shield Greep
             }
         }//i figured the formatting
         
