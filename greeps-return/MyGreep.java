@@ -83,13 +83,20 @@ public class MyGreep extends Greep
                 //no block, we'll make one by calling the boolean function
                 turnTowards(getMemory(1), getMemory(2));
                 move();
-        }
-    }
+            }
+        }//i figured the formatting
         else if (getMemory(0) == FOUND_TOMATO){
             //go get those delicious (fruits?)
             turnTowards(getMemory(1),getMemory(2));
             move();
         }
+        //time to go on the offensive
+        else if (numberOfOpponents(false) >= 2) {
+            //makes tactical sense to take out opponents when outnumbered
+            kablam();
+        }
+        
+    
         else {
             randomWalk();
             //checkFood(); //no point repeating
@@ -138,7 +145,7 @@ public class MyGreep extends Greep
         }
         else {
             return false; // if block isnt up
-    }
+        }
     }
     
     private int sqrtDistance(int x, int y)
