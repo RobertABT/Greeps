@@ -64,7 +64,7 @@ public class MyGreep extends Greep
         super.act();   // do not delete! leave as first statement in act().
         
         checkFood(); /*no point moving about if we arent actually looking for food 
-        where we are
+        where we are first
         */
         if (carryingTomato()) {
             if(atShip()) {
@@ -81,8 +81,8 @@ public class MyGreep extends Greep
             //lets use that block on the enemies
             if(!blockingPile(tomatoes)) {
                 //no block, we'll make one by calling the boolean function
-                turnTowards(getMemory(1), getMemory(2));
-                move();
+                //turnTowards(getMemory(1), getMemory(2));
+                //move();
             }
         }//i figured the formatting
         
@@ -161,6 +161,7 @@ public class MyGreep extends Greep
         if(onPile && getFriend() == null ){
             // no friends here :(
             block();
+            setFlag(2); //flag shows you are block greep
             return true; //if block is up
         }
         else {
