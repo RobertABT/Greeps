@@ -46,6 +46,8 @@ public class MyGreep extends Greep
     // Remember: you cannot extend the Greep's memory. So:
     // no additional fields (other than final fields) allowed in this class!
     
+    private static final int FOUND_TOMATO = 1;
+    
     /**
      * Default constructor. Do not remove.
      */
@@ -60,6 +62,10 @@ public class MyGreep extends Greep
     public void act()
     {
         super.act();   // do not delete! leave as first statement in act().
+        
+        checkFood(); /*no point moving about if we arent actually looking for food 
+        where we are
+        */
         if (carryingTomato()) {
             if(atShip()) {
                 dropTomato();
@@ -69,9 +75,24 @@ public class MyGreep extends Greep
                 move();
             }
         }
+        //a case for when we arrive at tomatoes
+        else if (getTomatoes() != null) { //checks if there are tomatoes at the current location
+            TomatoPile tomatoes = getTomatoes(); //checks if pile is here
+            //lets use that block on the enemies
+            if(!blockingPile(tomatoes)) {
+                //no block, we'll make one by calling the boolean function
+                turnTowards(getMemory(1), getMemory(2));
+                move();
+        }
+    }
+        else if (getMemory(0) == FOUND_TOMATO){
+            //go get those delicious (fruits?)
+            turnTowards(getMemory(1),getMemory(2));
+            move();
+        }
         else {
             randomWalk();
-            checkFood();
+            //checkFood(); //no point repeating
         }
     }
     
@@ -99,9 +120,34 @@ public class MyGreep extends Greep
             loadTomato();
             // Note: this attempts to load a tomato onto *another* Greep. It won't
             // do anything if we are alone here.
+            setMemory(0, FOUND_TOMATO);
+            setMemory(1, tomatoes.getX());
+            setMemory(2, tomatoes.getY());
         }
     }
-
+    
+    /**
+     * block a pile if there is no friendly greep in range and no shield in place
+     */
+    private boolean blockingPile(TomatoPile tomatoes){
+        boolean onPile = tomatoes != null && sqrtDistance(tomatoes.getX(), tomatoes.getY()) < 5;
+        if(onPile && getFriend() == null ){
+            // no friends here :(
+            block();
+            return true; //if block is up
+        }
+        else {
+            return false; // if block isnt up
+    }
+    }
+    
+    private int sqrtDistance(int x, int y)
+    {
+        int cX = getX() - x; //c as change
+        int cY = getY() - y;
+        return (int) Math.sqrt(cX * cX + cY * cY);
+    }
+    
     /**
      * This method specifies the name of the greeps (for display on the result board).
      * Try to keep the name short so that it displays nicely on the result board.
