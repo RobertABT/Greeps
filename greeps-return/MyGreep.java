@@ -85,6 +85,7 @@ public class MyGreep extends Greep
                 move();
             }
         }//i figured the formatting
+        
         else if (getMemory(0) == FOUND_TOMATO){
             //go get those delicious (fruits?)
             turnTowards(getMemory(1),getMemory(2));
@@ -100,6 +101,13 @@ public class MyGreep extends Greep
         else {
             randomWalk();
             //checkFood(); //no point repeating
+        }
+        
+        //Greeps are getting stuck a bit
+        if (atWater()){
+            int bearing = getRotation();
+            setRotation (bearing + Greenfoot.getRandomNumber(180));
+            move();
         }
     }
     
