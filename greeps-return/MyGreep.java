@@ -71,8 +71,10 @@ public class MyGreep extends Greep
                 dropTomato();
             }
             else {
-                turnHome();
-                move();
+                if (!getFlag(1)){
+					turnHome();
+					move();
+            	}
             }
         }
         //a case for when we arrive at tomatoes
