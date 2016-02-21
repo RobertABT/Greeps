@@ -71,8 +71,8 @@ public class MyGreep extends Greep
                 dropTomato();
             }
             else {
-				turnHome();
-				move();
+                turnHome();
+                move();
             }
         }
         //a case for when we arrive at tomatoes
@@ -81,13 +81,21 @@ public class MyGreep extends Greep
             //lets use that block on the enemies
             if(!blockingPile(tomatoes)) {
                 //no block, we'll make one by calling the boolean function
-                turnTowards(getMemory(1), getMemory(2));
+                turnTowards(getMemory(1), getMemory(2)); //getmemory 1 and 2 are the x,y of 
+                //tomato pile 1
                 move();
+            } else {
+                if (numberOfFriends(true) >= 1) {
+                    turnTowards(getMemory(1), getMemory(2)); //getmemory 1 and 2 are the x,y of 
+                    //tomato pile 1
+                    move();
+                }
             }
         }//i figured the formatting
         
         else if (getMemory(0) == FOUND_TOMATO){
             //go get those delicious (fruits?)
+            
             turnTowards(getMemory(1),getMemory(2));
             move();
         }
