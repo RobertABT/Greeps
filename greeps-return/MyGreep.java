@@ -71,7 +71,7 @@ public class MyGreep extends Greep
                 dropTomato();
             }
             else {
-                if (!getFlag(1)){
+                if (getFlag(1) != true){
 					turnHome();
 					move();
             	}
