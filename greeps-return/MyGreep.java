@@ -2,42 +2,42 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
 
 /**
  * A Greep is an alien creature that likes to collect tomatoes.
- *
+ * 
  * Rules:
+ * 
+ * Rule 1 
+ * Only change the class 'MyGreep'. No other classes may be modified or created. 
  *
- * Rule 1
- * Only change the class 'MyGreep'. No other classes may be modified or created.
- *
- * Rule 2
- * You cannot extend the Greeps' memory. That is: you are not allowed to add
+ * Rule 2 
+ * You cannot extend the Greeps' memory. That is: you are not allowed to add 
  * fields (other than final fields) to the class. Some general purpose memory is
- * provided. (The ship can also store data.)
- *
- * Rule 3
- * You can call any method defined in the "Greep" superclass, except act().
- *
- * Rule 4
+ * provided. (The ship can also store data.) 
+ * 
+ * Rule 3 
+ * You can call any method defined in the "Greep" superclass, except act(). 
+ * 
+ * Rule 4 
  * Greeps have natural GPS sensitivity. You can call getX()/getY() on any object
- * and get/setRotation() on yourself any time. Friendly greeps can communicate.
- * You can call getMemory() and getFlag() on another greep to ask what they know.
- *
- * Rule 5
- * No creation of objects. You are not allowed to create any scenario objects
- * (instances of user-defined classes, such as MyGreep). Greeps have no magic
- * powers - they cannot create things out of nothing.
- *
- * Rule 6
+ * and get/setRotation() on yourself any time. Friendly greeps can communicate. 
+ * You can call getMemory() and getFlag() on another greep to ask what they know. 
+ * 
+ * Rule 5 
+ * No creation of objects. You are not allowed to create any scenario objects 
+ * (instances of user-defined classes, such as MyGreep). Greeps have no magic 
+ * powers - they cannot create things out of nothing. 
+ * 
+ * Rule 6 
  * You are not allowed to call any methods (other than those listed in Rule 4)
- * of any other class in this scenario (including Actor and World).
- *
+ * of any other class in this scenario (including Actor and World). 
+ *  
  * If you change the name of this class you should also change it in
  * Ship.createGreep().
- *
+ * 
  * Please do not publish your solution anywhere. We might want to run this
  * competition again, or it might be used by teachers to run in a class, and
  * that would be ruined if solutions were available.
- *
- *
+ * 
+ * 
  * @author (RobertABT)
  * @version 0.1
  */
@@ -45,9 +45,9 @@ public class MyGreep extends Greep
 {
     // Remember: you cannot extend the Greep's memory. So:
     // no additional fields (other than final fields) allowed in this class!
-
+    
     private static final int FOUND_TOMATO = 1;
-
+    
     /**
      * Default constructor. Do not remove.
      */
@@ -55,15 +55,15 @@ public class MyGreep extends Greep
     {
         super(ship);
     }
-
+    
     /**
      * Do what a greep's gotta do.
      */
     public void act()
     {
         super.act();   // do not delete! leave as first statement in act().
-
-        checkFood(); /*no point moving about if we arent actually looking for food
+        
+        checkFood(); /*no point moving about if we arent actually looking for food 
         where we are
         */
         if (carryingTomato()) {
@@ -83,9 +83,10 @@ public class MyGreep extends Greep
                 //no block, we'll make one by calling the boolean function
                 turnTowards(getMemory(1), getMemory(2));
                 move();
+                setFlag(1,true); //set flag to say you are shield Greep
             }
         }//i figured the formatting
-
+        
         else if (getMemory(0) == FOUND_TOMATO){
             //go get those delicious (fruits?)
             turnTowards(getMemory(1),getMemory(2));
@@ -96,12 +97,13 @@ public class MyGreep extends Greep
             //makes tactical sense to take out opponents when outnumbered
             kablam();
         }
-
+        
+    
         else {
             randomWalk();
             //checkFood(); //no point repeating
         }
-        /*the following code should wipe memory bit 0
+        /*the following code should wipe memory bit 0 
          * if there are no tomatoes at the point in memory
          * because otherwise greeps pile up at one location
          */
@@ -116,8 +118,8 @@ public class MyGreep extends Greep
             move();
         }
     }
-
-    /**
+    
+    /** 
      * Move forward, with a slight chance of turning randomly
      */
     public void randomWalk()
@@ -126,7 +128,7 @@ public class MyGreep extends Greep
         if (randomChance(3)) {
             turn((Greenfoot.getRandomNumber(3) - 1) * 100);
         }
-
+        
         move();
     }
 
@@ -151,7 +153,7 @@ public class MyGreep extends Greep
             //else if (
         }
     }
-
+    
     /**
      * block a pile if there is no friendly greep in range and no shield in place
      */
@@ -166,19 +168,19 @@ public class MyGreep extends Greep
             return false; // if block isnt up
         }
     }
-
+    
     private int sqrtDistance(int x, int y)
     {
         int cX = getX() - x; //c as change
         int cY = getY() - y;
         return (int) Math.sqrt(cX * cX + cY * cY);
     }
-
+    
     private void wipeMemory(){
         setMemory(0,0); //wipes Found tomato bit
         //bytes at 1 and 2 will be reset when next pile is found
     }
-
+    
     /**
      * This method specifies the name of the greeps (for display on the result board).
      * Try to keep the name short so that it displays nicely on the result board.
