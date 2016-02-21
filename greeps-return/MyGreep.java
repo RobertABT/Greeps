@@ -38,7 +38,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
  * that would be ruined if solutions were available.
  * 
  * 
- * @author (your name here)
+ * @author (RobertABT)
  * @version 0.1
  */
 public class MyGreep extends Greep
@@ -135,9 +135,12 @@ public class MyGreep extends Greep
             loadTomato();
             // Note: this attempts to load a tomato onto *another* Greep. It won't
             // do anything if we are alone here.
+            //i think this keeps getting flipped, confusing greeps
+            if (getMemory(0) == 0){
             setMemory(0, FOUND_TOMATO);
             setMemory(1, tomatoes.getX());
             setMemory(2, tomatoes.getY());
+        }//by adding this if statement the greeps should only go to one pile
         }
     }
     
