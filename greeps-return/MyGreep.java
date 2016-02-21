@@ -91,7 +91,7 @@ public class MyGreep extends Greep
             move();
         }
         //time to go on the offensive
-        else if (numberOfOpponents(false) >= 2) {
+        else if (numberOfOpponents(false) >= 3) {
             //makes tactical sense to take out opponents when outnumbered
             kablam();
         }
