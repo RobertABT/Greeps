@@ -85,8 +85,8 @@ public class MyGreep extends Greep
                 //tomato pile 1
                 move();
             } else {
-                if (numberOfFriends(true) >= 1) {
-                    turnTowards(getMemory(1), getMemory(2)); //getmemory 1 and 2 are the x,y of 
+                if (numberOfFriends(false) >= 1){
+                    turnHome();                    
                     //tomato pile 1
                     move();
                 }
