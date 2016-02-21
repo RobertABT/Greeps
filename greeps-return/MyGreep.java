@@ -76,6 +76,7 @@ public class MyGreep extends Greep
             }
         }
         //a case for when we arrive at tomatoes
+        
         else if (getTomatoes() != null) { //checks if there are tomatoes at the current location
             TomatoPile tomatoes = getTomatoes(); //checks if pile is here
             //lets use that block on the enemies
